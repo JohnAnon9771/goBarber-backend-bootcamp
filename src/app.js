@@ -4,6 +4,7 @@ import express from 'express';
 import { resolve } from 'path';
 import Youch from 'youch';
 import * as Sentry from '@sentry/node';
+import cors from 'cors';
 import sentryConfig from './config/sentry';
 import routes from './routes';
 
@@ -23,6 +24,7 @@ class App {
 
   middleware() {
     this.app.use(Sentry.Handlers.requestHandler());
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(
       '/files',
